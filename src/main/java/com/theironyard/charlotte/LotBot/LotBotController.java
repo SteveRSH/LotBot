@@ -16,18 +16,28 @@ public class LotBotController {
     // structure will make your life easier.
     // think critically about your choices
     List<Lot> lots = new ArrayList<>();
+
+//*****************************The API*************************************************
+
+    //Get a list of all lots in the system, including # of spots.  DONE
     @CrossOrigin
     @RequestMapping(path = "/lots", method = RequestMethod.GET)
     public List<Lot>getLots(){
         return lots;
 }
+
+    //Get a list of the status of all spots in the specified lot,
+    // including the license plate # of anyone parked.              DONE
     @CrossOrigin
     @RequestMapping(path = "/lots/{id}", method = RequestMethod.GET)
 //    @RequestBody
-    public void getID(@PathVariable("id") int id) {
-        lots.get(id);
+    public Lot getID(@PathVariable("id") int id) {
+//        System.out.println(id); works in terminal
+        return lots.get(id);
     }
 
+    //Park a new car in the specified lot.
+    // Must send the Car object in the request body.
     @CrossOrigin
     @RequestMapping(path = "/lots/{id}", method = RequestMethod.POST)
     public void addLot (@RequestBody Car cars, @PathVariable("id") int id) {
@@ -36,12 +46,15 @@ public class LotBotController {
 //    setID(@PathVariable("id") int id) {
 //        lots.set(id).getSpaces();
     }
+
+    //Open up the specified spot and return the total owed.
     @CrossOrigin
     @RequestMapping(path = "/lots/{Id}/{spot}", method = RequestMethod.PUT)
     public void setSpecifiedSpot() {
 
     }
-
+    //Return a list of all transactions,
+    // along with the bill and license plate number of the charged vehicle.
     List<Transaction> transactions = new ArrayList<>();
     @CrossOrigin
     @RequestMapping(path = "/transactions", method = RequestMethod.GET)
@@ -66,7 +79,7 @@ public class LotBotController {
         // we have to create lots of lots here
         // if you want fewer lots than 20
         // that's okay too
-        for (int i = 0;i < 20;i++) {
+        for (int i = 0;i < 3;i++) {
             lots.add(Lot.createLot());
         }
     }
