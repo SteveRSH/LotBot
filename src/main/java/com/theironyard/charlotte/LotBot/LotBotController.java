@@ -4,6 +4,7 @@ package com.theironyard.charlotte.LotBot;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class LotBotController {
     // structure will make your life easier.
     // think critically about your choices
     List<Lot> lots = new ArrayList<>();
+    List<Transaction> transactions = new ArrayList<>();
 
 //*****************************The API*************************************************
 
@@ -38,13 +40,37 @@ public class LotBotController {
 
     //Park a new car in the specified lot.
     // Must send the Car object in the request body.
+
+
     @CrossOrigin
-    @RequestMapping(path = "/lots/{id}", method = RequestMethod.POST)
-    public void addLot (@RequestBody Car cars, @PathVariable("id") int id) {
+    @RequestMapping(path = "/lots/{id}/{index}", method = RequestMethod.POST)
+    public void addLot (@RequestBody Car cars, @PathVariable("index") int index, @PathVariable("id") int id)
+
+    {
+        // find the lot based on the id
+        // get the array of space objects
+        // create a new transaction
+        // set the checkedIn variable for the transaction
+        // set the car variable for the transaction
+        // add that transaction to the array
+
+        // add the same transaction to the transactions List
+
+    //lots.get(id).getSpaces()[index] = new Space(transaction)
+    //lots.get(id).getSpaces()[index].setCar(car);
+    //getLots.add(Lot.createLot
 
 
-//    setID(@PathVariable("id") int id) {
-//        lots.set(id).getSpaces();
+        Transaction transaction = new Transaction(cars, LocalDateTime.now());
+        lots.get(id).getSpaces()[index] = new Space(transaction);
+        transactions.add(transaction);
+
+//        transaction.add(Transaction.createTransaction(cars,
+//         LocalDateTime.now(), lots.get(id).getPrice()));
+
+        System.out.println(transaction);
+
+
     }
 
     //Open up the specified spot and return the total owed.
@@ -53,12 +79,11 @@ public class LotBotController {
     public void setSpecifiedSpot() {
 
     }
-    //Return a list of all transactions,
-    // along with the bill and license plate number of the charged vehicle.
-    List<Transaction> transactions = new ArrayList<>();
+    //Return a list of all transactions, DONE
+    // along with the bill and license plate number of the charged vehicle.  DONE
     @CrossOrigin
     @RequestMapping(path = "/transactions", method = RequestMethod.GET)
-    public List<Transaction>getTransaction(){
+    public List<Transaction> getTransaction(){
         return transactions;
     }
 

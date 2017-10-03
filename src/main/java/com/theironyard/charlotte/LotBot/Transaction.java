@@ -9,6 +9,14 @@ public class Transaction {
     private LocalDateTime checkedOutDate;
     private Double price;
 
+    public Transaction(Car car, LocalDateTime checkedInDate) {
+        this.car = car;
+        this.checkedInDate = checkedInDate;
+    }
+
+    public Transaction() {
+    }
+
     public Car getCar() {
         return car;
     }

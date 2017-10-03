@@ -5,6 +5,9 @@ public class Lot {
     private int id;
     private Space[] spaces;
 
+    public Lot() {
+    }
+
     public int getId() {
         return id;
     }
