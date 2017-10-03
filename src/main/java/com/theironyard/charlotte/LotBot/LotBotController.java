@@ -38,8 +38,8 @@ public class LotBotController {
         return lots.get(id);
     }
 
-    //Park a new car in the specified lot.
-    // Must send the Car object in the request body.
+    //Park a new car in the specified lot.    DONE
+    // Must send the Car object in the request body.  DONE
 
 
     @CrossOrigin
@@ -47,26 +47,11 @@ public class LotBotController {
     public void addLot (@RequestBody Car cars, @PathVariable("index") int index, @PathVariable("id") int id)
 
     {
-        // find the lot based on the id
-        // get the array of space objects
-        // create a new transaction
-        // set the checkedIn variable for the transaction
-        // set the car variable for the transaction
-        // add that transaction to the array
-
-        // add the same transaction to the transactions List
-
-    //lots.get(id).getSpaces()[index] = new Space(transaction)
-    //lots.get(id).getSpaces()[index].setCar(car);
-    //getLots.add(Lot.createLot
-
 
         Transaction transaction = new Transaction(cars, LocalDateTime.now());
         lots.get(id).getSpaces()[index] = new Space(transaction);
         transactions.add(transaction);
 
-//        transaction.add(Transaction.createTransaction(cars,
-//         LocalDateTime.now(), lots.get(id).getPrice()));
 
         System.out.println(transaction);
 
@@ -75,7 +60,7 @@ public class LotBotController {
 
     //Open up the specified spot and return the total owed.
     @CrossOrigin
-    @RequestMapping(path = "/lots/{Id}/{spot}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/lots/{Id}/{index}", method = RequestMethod.PUT)
     public void setSpecifiedSpot() {
 
     }
@@ -104,7 +89,7 @@ public class LotBotController {
         // we have to create lots of lots here
         // if you want fewer lots than 20
         // that's okay too
-        for (int i = 0;i < 3;i++) {
+        for (int i = 0;i < 20;i++) {
             lots.add(Lot.createLot());
         }
     }
@@ -124,3 +109,18 @@ public class LotBotController {
 
 //}
 
+// find the lot based on the id
+// get the array of space objects
+// create a new transaction
+// set the checkedIn variable for the transaction
+// set the car variable for the transaction
+// add that transaction to the array
+
+// add the same transaction to the transactions List
+
+//lots.get(id).getSpaces()[index] = new Space(transaction)
+//lots.get(id).getSpaces()[index].setCar(car);
+//getLots.add(Lot.createLot
+
+//transaction.add(Transaction.createTransaction(cars,
+//         LocalDateTime.now(), lots.get(id).getPrice()));
