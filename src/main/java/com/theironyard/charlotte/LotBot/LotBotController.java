@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController //for APIs
@@ -44,7 +45,9 @@ public class LotBotController {
 
     @CrossOrigin
     @RequestMapping(path = "/lots/{id}/{index}", method = RequestMethod.POST)
-    public void addLot (@RequestBody Car cars, @PathVariable("index") int index, @PathVariable("id") int id)
+    public void addLot (@RequestBody Car cars,
+                        @PathVariable("index") int index,
+                        @PathVariable("id") int id)
 
     {
 
@@ -52,16 +55,38 @@ public class LotBotController {
         lots.get(id).getSpaces()[index] = new Space(transaction);
         transactions.add(transaction);
 
-
         System.out.println(transaction);
-
-
     }
 
     //Open up the specified spot and return the total owed.
     @CrossOrigin
     @RequestMapping(path = "/lots/{Id}/{index}", method = RequestMethod.PUT)
-    public void setSpecifiedSpot() {
+    public Double setCarLeavingLot(
+            @PathVariable("index") int index,
+            @PathVariable("id") int id) {
+
+            double time = 0;
+
+            Transaction exactTime = lots.get(id).getSpaces()[index].getTransaction();
+            exactTime.setCheckedOutDate(LocalDateTime.now());
+            time = DateHelper.getHoursBetweenDates(exactTime.getCheckedInDate(), exactTime.getCheckedOutDate());
+            exactTime.setPrice(time * 20.00);
+
+            lots.get(id).getSpaces()[index] = null;
+            return exactTime.getPrice();
+
+//
+//            ArrayList(Space, null);
+
+            //get transaction and set checkout time
+            //use checkout time less checkin time multiply by price (use date helper)
+            //set the price
+            //array of space objects set back to null
+            //return the price
+
+
+
+
 
     }
     //Return a list of all transactions, DONE
