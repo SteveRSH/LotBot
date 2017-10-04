@@ -75,16 +75,6 @@ public class LotBotController {
             lots.get(Id).getSpaces()[index] = null;
             return exactTime.getPrice();
 
-//
-//            ArrayList(Space, null);
-
-            //get transaction and set checkout time
-            //use checkout time less checkin time multiply by price (use date helper)
-            //set the price
-            //array of space objects set back to null
-            //return the price
-
-
 
 
 
