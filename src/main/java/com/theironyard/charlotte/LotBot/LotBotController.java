@@ -63,16 +63,16 @@ public class LotBotController {
     @RequestMapping(path = "/lots/{Id}/{index}", method = RequestMethod.PUT)
     public Double setCarLeavingLot(
             @PathVariable("index") int index,
-            @PathVariable("id") int id) {
+            @PathVariable("Id") int Id) {
 
             double time = 0;
 
-            Transaction exactTime = lots.get(id).getSpaces()[index].getTransaction();
+            Transaction exactTime = lots.get(Id).getSpaces()[index].getTransaction();
             exactTime.setCheckedOutDate(LocalDateTime.now());
             time = DateHelper.getHoursBetweenDates(exactTime.getCheckedInDate(), exactTime.getCheckedOutDate());
             exactTime.setPrice(time * 20.00);
 
-            lots.get(id).getSpaces()[index] = null;
+            lots.get(Id).getSpaces()[index] = null;
             return exactTime.getPrice();
 
 //
